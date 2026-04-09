@@ -1,0 +1,45 @@
+.tos-page {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tos-header {
+  margin-bottom: 1.75rem;
+}
+
+.tos-header h1 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .tos-header h1 {
+    font-size: 2rem;
+  }
+}
+
+.tos-intro {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text);
+  margin: 0;
+}
+
+.tos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tos-list__item {
+  display: block;
+}
