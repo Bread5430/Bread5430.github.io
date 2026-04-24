@@ -41,11 +41,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # User/org site (repo named {owner}.github.io) is served at https://{owner}.github.io/
+      # with asset base "/". Project sites use https://{owner}.github.io/{repo}/ → base "/{repo}/".
+      - name: Set Vite base for GitHub Pages
+        run: |
+          owner="${GITHUB_REPOSITORY%%/*}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          r=$(echo "$repo" | tr '[:upper:]' '[:lower:]')
+          want=$(echo "${owner}.github.io" | tr '[:upper:]' '[:lower:]')
+          if [ "$r" = "$want" ]; then
+            echo "GITHUB_PAGES_BASE=/" >> "$GITHUB_ENV"
+            echo "Pages type: user/org site (root URL)"
+          else
+            echo "GITHUB_PAGES_BASE=/${repo}/" >> "$GITHUB_ENV"
+            echo "Pages type: project site → base /${repo}/"
+          fi
+
       - name: Build with Vite
         run: npm run build
-        env:
-          # Project Pages URL: https://<owner>.github.io/<repo>/
-          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
