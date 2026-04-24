@@ -43,3 +43,45 @@
 .tos-list__item {
   display: block;
 }
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100%;
+}
+
+.app-shell__outlet {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.site-nav__link {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+}
+
+.site-nav__link:hover {
+  background: var(--term-toggle-hover);
+  color: var(--text-h);
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--accent);
+  background: var(--accent-bg);
+}

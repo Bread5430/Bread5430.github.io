@@ -1,25 +1,33 @@
+import { HashRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { TosHistoryPage } from './pages/TosHistoryPage'
+import { TosQuizPage } from './pages/TosQuizPage'
+import { TosSplitViewPage } from './pages/TosSplitViewPage'
 import './App.css'
-import { termsSummary } from './data/termsSummary'
-import { ExpandableTermCard } from './components/ExpandableTermCard'
 
 function App() {
   return (
-    <div className="tos-page">
-      <header className="tos-header">
-        <h1>Terms of Service — Key points</h1>
-        <p className="tos-intro">
-          This is a UI prototype: short summaries of common clauses, not legal
-          advice or the terms of any real service.
-        </p>
-      </header>
-      <ul className="tos-list">
-        {termsSummary.map((item) => (
-          <li key={item.id} className="tos-list__item">
-            <ExpandableTermCard item={item} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <HashRouter>
+      <div className="app-shell">
+        <nav className="site-nav" aria-label="Site">
+          <NavLink className="site-nav__link" end to="/">
+            Terms of Service
+          </NavLink>
+          <NavLink className="site-nav__link" to="/history">
+            Revision history
+          </NavLink>
+          <NavLink className="site-nav__link" to="/check">
+            Check understanding
+          </NavLink>
+        </nav>
+        <main className="app-shell__outlet">
+          <Routes>
+            <Route path="/" element={<TosSplitViewPage />} />
+            <Route path="/history" element={<TosHistoryPage />} />
+            <Route path="/check" element={<TosQuizPage />} />
+          </Routes>
+        </main>
+      </div>
+    </HashRouter>
   )
 }
 
